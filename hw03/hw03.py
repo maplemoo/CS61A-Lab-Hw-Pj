@@ -28,7 +28,13 @@ def num_eights(n):
     True
     """
     "*** YOUR CODE HERE ***"
-
+    if n == 0:
+        return 0
+    else:
+        if (n % 10 == 8):
+            return num_eights(n // 10) + 1
+        else:
+            return num_eights(n // 10)
 
 def digit_distance(n):
     """Determines the digit distance of n.
@@ -50,6 +56,10 @@ def digit_distance(n):
     True
     """
     "*** YOUR CODE HERE ***"
+    if n < 10:
+        return 0
+    else:
+        return digit_distance(n // 10) + abs(n % 10 - (n // 10) % 10)
 
 
 def interleaved_sum(n, odd_func, even_func):
@@ -72,7 +82,12 @@ def interleaved_sum(n, odd_func, even_func):
     True
     """
     "*** YOUR CODE HERE ***"
-
+    def helper(k, term_func1, term_func2):
+        if k > n:
+            return 0
+        else:
+            return term_func1(k) + helper(k + 1, term_func2, term_func1)
+    return helper(1, odd_func, even_func)
 
 def next_larger_coin(coin):
     """Returns the next larger coin in order.
@@ -126,7 +141,21 @@ def count_coins(total):
     True
     """
     "*** YOUR CODE HERE ***"
+    def helper_count(num, coin):
+        if num == 0:
+            return 1
+        elif num < 0:
+            return 0
+        elif coin == 0:
+            return 0
+        else:
+            if coin == 1:
+                return 1
+                #return helper_count(num - coin, coin)
+            else:
+                return helper_count(num - coin, coin) + helper_count(num, next_smaller_coin(coin))
 
+    return helper_count(total, 25)
 
 def print_move(origin, destination):
     """Print instructions to move a disk."""
@@ -161,6 +190,13 @@ def move_stack(n, start, end):
     """
     assert 1 <= start <= 3 and 1 <= end <= 3 and start != end, "Bad start/end"
     "*** YOUR CODE HERE ***"
+    if n == 1:
+        print_move(start, end)
+        return
+    other = 6 - start - end
+    move_stack(n - 1, start, other)
+    move_stack(1, start, end)
+    move_stack(n - 1, other, end)
 
 
 from operator import sub, mul
@@ -176,5 +212,5 @@ def make_anonymous_factorial():
     ...     ['Assign', 'AnnAssign', 'AugAssign', 'NamedExpr', 'FunctionDef', 'Recursion'])
     True
     """
-    return 'YOUR_EXPRESSION_HERE'
+    return lambda n : (lambda x, function : 1 if x == 1 else x * function(x - 1, function)) (n, lambda x, function : 1 if x == 1 else x * function(x - 1, function))
 
