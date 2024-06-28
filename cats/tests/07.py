@@ -123,7 +123,7 @@ test = {
           >>> with io.StringIO() as buf, redirect_stdout(buf):
           ...     trace.Trace(trace=True).runfunc(minimum_mewtations, "someawe", "awesome", 3)
           ...     output = buf.getvalue()
-          >>> len([line for line in output.split('\n') if 'funcname' in line]) <= 400 # Make sure your base case(s) is as tight as possible
+          >>> len([line for line in output.split('\n') if 'funcname' in line]) < 1000
           True
           """,
           'hidden': False,

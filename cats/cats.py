@@ -101,16 +101,14 @@ def wpm(typed, elapsed):
     # END PROBLEM 4
 
 
-############
-# Phase 2A #
-############
-
+###########
+# Phase 2 #
+###########
 
 def autocorrect(typed_word, word_list, diff_function, limit):
     """Returns the element of WORD_LIST that has the smallest difference
-    from TYPED_WORD. If multiple words are tied for the smallest difference,
-    return the one that appears closest to the front of WORD_LIST. If the
-    difference is greater than LIMIT, instead return TYPED_WORD.
+    from TYPED_WORD. Instead returns TYPED_WORD if that difference is greater
+    than LIMIT.
 
     Arguments:
         typed_word: a string representing a word that may contain typos
@@ -157,11 +155,6 @@ def feline_fixes(typed, source, limit):
     # END PROBLEM 6
 
 
-############
-# Phase 2B #
-############
-
-
 def minimum_mewtations(typed, source, limit):
     """A diff function that computes the edit distance from TYPED to SOURCE.
     This function takes in a string TYPED, a string SOURCE, and a number LIMIT.
@@ -178,17 +171,17 @@ def minimum_mewtations(typed, source, limit):
     3
     """
     assert False, 'Remove this line'
-    if ___________: # Base cases should go here, you may add more base cases as needed.
+    if ___________:  # Base cases should go here, you may add more base cases as needed.
         # BEGIN
         "*** YOUR CODE HERE ***"
         # END
     # Recursive cases should go below here
-    if ___________: # Feel free to remove or add additional cases
+    if ___________:  # Feel free to remove or add additional cases
         # BEGIN
         "*** YOUR CODE HERE ***"
         # END
     else:
-        add = ... # Fill in these lines
+        add = ...  # Fill in these lines
         remove = ...
         substitute = ...
         # BEGIN
@@ -201,7 +194,8 @@ def final_diff(typed, source, limit):
     If you implement this function, it will be used."""
     assert False, 'Remove this line to use your final_diff function.'
 
-FINAL_DIFF_LIMIT = 6 # REPLACE THIS WITH YOUR LIMIT
+
+FINAL_DIFF_LIMIT = 6  # REPLACE THIS WITH YOUR LIMIT
 
 
 ###########
@@ -209,13 +203,13 @@ FINAL_DIFF_LIMIT = 6 # REPLACE THIS WITH YOUR LIMIT
 ###########
 
 
-def report_progress(typed, source, user_id, upload):
+def report_progress(typed, prompt, user_id, upload):
     """Upload a report of your id and progress so far to the multiplayer server.
     Returns the progress so far.
 
     Arguments:
         typed: a list of the words typed so far
-        source: a list of the words in the typing source
+        prompt: a list of the words in the typing prompt
         user_id: a number representing the id of the current user
         upload: a function used to upload progress to the multiplayer server
 
@@ -224,11 +218,11 @@ def report_progress(typed, source, user_id, upload):
     >>> print_progress({'id': 1, 'progress': 0.6})
     ID: 1 Progress: 0.6
     >>> typed = ['how', 'are', 'you']
-    >>> source = ['how', 'are', 'you', 'doing', 'today']
-    >>> report_progress(typed, source, 2, print_progress)
+    >>> prompt = ['how', 'are', 'you', 'doing', 'today']
+    >>> report_progress(typed, prompt, 2, print_progress)
     ID: 2 Progress: 0.6
     0.6
-    >>> report_progress(['how', 'aree'], source, 3, print_progress)
+    >>> report_progress(['how', 'aree'], prompt, 3, print_progress)
     ID: 3 Progress: 0.2
     0.2
     """
@@ -237,13 +231,13 @@ def report_progress(typed, source, user_id, upload):
     # END PROBLEM 8
 
 
-def time_per_word(words, timestamps_per_player):
+def time_per_word(words, times_per_player):
     """Given timing data, return a match data abstraction, which contains a
     list of words and the amount of time each player took to type each word.
 
     Arguments:
         words: a list of words, in the order they are typed.
-        timestamps_per_player: A list of lists of timestamps including the time
+        times_per_player: A list of lists of timestamps including the time
                           the player started typing, followed by the time
                           the player finished typing each word.
 
@@ -313,9 +307,11 @@ def time(match, player_num, word_index):
     assert player_num < len(get_all_times(match)), "player_num out of range of players"
     return get_all_times(match)[player_num][word_index]
 
+
 def get_all_words(match):
     """A selector function for all the words in the match"""
     return match["words"]
+
 
 def get_all_times(match):
     """A selector function for all typing times for all players"""
@@ -325,6 +321,7 @@ def get_all_times(match):
 def match_string(match):
     """A helper function that takes in a match data abstraction and returns a string representation of it"""
     return f"match({get_all_words(match)}, {get_all_times(match)})"
+
 
 enable_multiplayer = False  # Change to True when you're ready to race.
 

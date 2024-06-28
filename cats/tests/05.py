@@ -29,6 +29,13 @@ test = {
           >>> autocorrect("outside", ["idea", "insider"], first_diff, 0.5)
           09b04681a750c56377719aed63ffc997
           # locked
+          >>> length_ratio = lambda w1, w2, limit: len(w2) / len(w1) # An asymmetric diff function
+          >>> autocorrect("aaa", ["a"], length_ratio, 2) # typed_word ("aaa") is passed in as the first argument to a diff function
+          45dd5175e49c2ee98a93ac63192d7d67
+          # locked
+          >>> autocorrect("cats", ["panthers", "lions"], length_ratio, 2)
+          6226b9e7b92f520a34b4109e8c7cc991
+          # locked
           """,
           'hidden': False,
           'locked': True,
@@ -36,11 +43,6 @@ test = {
         },
         {
           'code': r"""
-          >>> length_ratio = lambda w1, w2, limit: len(w2) / len(w1) # An asymmetric diff function
-          >>> autocorrect("aaa", ["a"], length_ratio, 2) # typed_word ("aaa") is passed in as the first argument to a diff function
-          'a'
-          >>> autocorrect("cats", ["panthers", "lions"], length_ratio, 2)
-          'lions'
           >>> ten_diff = lambda w1, w2, limit: 10 # Always returns 10
           >>> autocorrect("hwllo", ["butter", "hello", "potato"], ten_diff, 20)
           'butter'
