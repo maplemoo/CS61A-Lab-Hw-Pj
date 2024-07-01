@@ -1,0 +1,1 @@
+print("NI,MA,DE")
