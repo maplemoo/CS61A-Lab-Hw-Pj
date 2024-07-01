@@ -1,1 +1,0 @@
-print("NI,MA,DE")
